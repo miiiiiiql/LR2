@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Библиотека</title>
+	<link rel="stylesheet" href="./main.css">
+	<style>
+			.backButton {
+				background: transparent;
+				border: none;
+				margin-top: 10px;
+				position: relative;
+			}
+			.backButton > a {
+				font-size: 20px;
+				color: white;
+				text-decoration: none;
+				margin-left: 40px;
+			}
+			.backButton:before {
+				content: '';
+				position: absolute;
+				left: 0px;
+				bottom: 0px;
+				border: 10px solid transparent;
+				border-top: 10px solid white;
+				transform: rotate(90deg);
+			}
+		</style>
+</head>
+<body>
+	<header name="header">
+		<h1>Справочная информация</h1>
+		<button class="backButton"><a href="index.html">Главная страница</a></button>
+	</header>
+	<div class="container">
+		<form action="./cgi-bin/form.py" method="post">
+			<div class="formBlock">
+				<label class="formLabel">
+					ФИО
+				</label>
+				<input type="text" class="input" name="username">
+			</div>
+			<div class="formBlock">
+				<label class="formLabel">
+					Какой язык программирования вы чаще всего используете?
+				</label>
+				<select class='select' name="userFavoriteLanguage" id="">
+					<option value="HTML">
+						HTML
+					</option>
+					<option value="CSS">
+						CSS
+					</option>
+					<option value="JavaScript">
+						JavaScript
+					</option>
+					<option value="Python">
+						Python
+					</option>
+					<option value="PHP">
+						PHP
+					</option>
+				</select>
+			</div>
+			<div class="formBlock">
+				<label class="formLabel" name="userFile">
+					Прикрепите ваш лучший код с парралелизмом:
+				</label>
+				<input type="file" name="userFile">
+			</div>
+			<div class="formRow">
+				<input type="checkbox" class="formCheckBox" required>
+				<label class="formLabel">
+					Я учусь в гуапе
+				</label>
+			</div>
+			<div class="formBlock">
+				<label for="" class="formLabel">
+					Какой из инструментов параллелизма вы использовали последний раз:
+				</label>
+				<div class="formCheckboxRow">
+					<input type="radio" name="userLastInstrument" value="OpenMP">
+					<label for="">OpenMP</label>
+				</div>
+				<div class="formCheckboxRow">
+					<input type="radio" name="userLastInstrument" value="POSIX Threads">
+					<label for="">POSIX Threads</label>
+				</div>
+				<div class="formCheckboxRow">
+					<input type="radio" name="userLastInstrument" value="Windows API">
+					<label for="">Windows API</label>
+				</div>
+				<div class="formCheckboxRow">
+					<input type="radio" name="userLastInstrument" value="PVM (Parallel Virtual Machine)">
+					<label for="">PVM (Parallel Virtual Machine)</label>
+				</div>
+				<div class="formCheckboxRow">
+					<input type="radio" name="userLastInstrument" value="MPI (Message Passing Interface)">
+					<label for="">MPI (Message Passing Interface)</label>
+				</div>
+				<div class="formCheckboxRow">
+					<input type="radio" name="userLastInstrument" value="Другой">
+					<label for="">Другой</label>
+				</div>
+			</div>
+			<button class="button" type="submit">
+				Отправить
+			</button>
+		</form>
+	</div>
+	<footer class="footer">
+		<p class="copyright" name="copyright">
+			2021 © Марина Яснева
+		</p>
+	</footer>
+</body>
+</html>

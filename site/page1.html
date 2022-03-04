@@ -1,0 +1,84 @@
+<!DOCKTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>
+			Вычислительная техника
+		</title>
+		<link rel="stylesheet" href="./main.css">
+		<style>
+			.backButton {
+				background: transparent;
+				border: none;
+				margin-top: 10px;
+				position: relative;
+			}
+			.backButton > a {
+				font-size: 20px;
+				color: white;
+				text-decoration: none;
+				margin-left: 40px;
+			}
+			.backButton:before {
+				content: '';
+				position: absolute;
+				left: 0px;
+				bottom: 0px;
+				border: 10px solid transparent;
+				border-top: 10px solid white;
+				transform: rotate(90deg);
+			}
+		</style>
+	</head>
+
+	<body>
+	<header name="header">
+		<h1>Справочная информация</h1>
+		<button class="backButton"><a href="index.html">Главная страница</a></button>
+	</header>
+	<section>
+		<div class="container">
+			<p>Вычислительная техника является важнейшим компонентом процесса вычислений и обработки данных. Включает в себя аппаратное и программное обеспечение, также используется для управления и обработки информации.</p>
+			<p><img src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photo/8963995/image/a498bdb0629d04e1c20ab825b381d0bb"></p>
+			<h2>Разработка вычислительной техники</h2>
+			<p>С 1960-х годов в вычислительной технике стали использоваться интегральные микросхемы, что привело к её миниатюризации. Производство интегральных микросхем — это ключевая технология современной электронной промышленности.</p>
+			<p>Задачи, связанные с компьютерной инженерией, включают написание программного и микропрограммного обеспечения для встроенных микроконтроллеров, проектирование сверхбольших интегральных схем, аналоговых датчиков, плат смешанных сигналов, а также разработку операционных систем.</p>
+			<p>Принципы действия, информационные связи и взаимное соединение основных логических узлов компьютера определяются его архитектурой. Начиная с 1990-х годов новые компьютерные архитектуры обычно «строятся», тестируются и настраиваются внутри какой-либо другой компьютерной архитектуры в симуляторе компьютерной архитектуры.</p>
+		</div>
+	</section>
+	<div class="authorModal" name="authorModal">
+		<h3>
+			Марина Яснева
+		</h3>
+		<p>
+			Группа 4916
+		</p>
+	</div>
+	<footer class="footer">
+		<p class="copyright" name="copyright">
+			2021 © Марина Яснева
+		</p>
+	</footer>
+	<script>
+
+		const getRandomInt = (max) => {
+			return Math.floor(Math.random() * max);
+		}
+		const authorModal = document.getElementsByName('authorModal')[0];
+		const headerElem = document.getElementsByName('header')[0];
+		const copyrightElem = document.getElementsByName('copyright')[0];
+
+		const onOpenModal = () => {
+			authorModal.style.display = 'flex';
+		}
+
+		copyrightElem.addEventListener('mouseover', onOpenModal);
+
+		const onChangeHeaderBackground = () => {
+			headerElem.style.background = `rgb(${getRandomInt(256)}, ${getRandomInt(256)}, ${getRandomInt(256)})`
+		}
+
+		headerElem.addEventListener('mouseover', onChangeHeaderBackground);
+	</script>
+	</body>
+</html>
