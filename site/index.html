@@ -1,0 +1,242 @@
+<!DOCKTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>
+			Параллельные вычисления
+		</title>
+		<link rel="stylesheet" href="./main.css">
+	</head>
+
+	<body>
+	<header name="header">
+		<h1>Справочная информация</h1>
+		<p id="headerDesc">
+			Параллельные вычисления — способ организации
+			<a href="page1.html" class="headerLink">компьютерных вычислений</a>
+			, при котором программы разрабатываются как набор взаимодействующих вычислительных процессов, работающих параллельно (одновременно).
+		</p>
+	</header>
+	<section>
+		<div class="container">
+			<div class="gallery" name="slideImg">
+			</div>
+
+			<table class="table">
+			<caption> Способы синхронизации данных </caption>
+			<tr>
+				<td>
+					Взаимодействие через разделяемую память
+				</td>
+				<td>
+					Взаимодействие с помощью передачи сообщений
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="longtext">
+						<p>
+							На каждом процессоре мультипроцессорной системы запускается поток исполнения, который принадлежит
+							одному процессу. Потоки обмениваются данными через общий для данного процесса участок памяти.
+							Количество потоков соответствует количеству процессоров. Потоки создаются либо средствами языка,
+							либо с помощью библиотек явно, либо декларативно, или автоматически встроенными средствами компилятора.
+							Данный вид параллельного программирования обычно требует какой-то формы захвата управления для
+							координации потоков между собой.
+						</p>
+						<img src="./img/slide2.gif"
+							 alt=""
+							 width="400"
+						>
+					</div>
+				</td>
+				<td>
+					<div class="longtext">
+						<p>
+							На каждом процессоре многопроцессорной системы запускается
+							однопоточный процесс, который обменивается данными с другими процессами, работающими на других процессорах,
+							с помощью сообщений. Процессы создаются явно, путём вызова соответствующей функции операционной системы,
+							а обмен сообщениями — с помощью библиотеки, или с помощью средств языка. Обмен сообщениями может
+							происходить асинхронно, либо c использованием метода «рандеву», при котором отправитель блокирован до
+							тех пор, пока его сообщение не будет доставлено. Асинхронная передача сообщений может быть надёжной
+							либо ненадёжной
+						</p>
+					</div>
+			</td></tr>
+		</table
+		>
+		</div>
+	</section>
+	<section>
+		<div class="container">
+			<h2>Типичные задачи, допускающие параллельные вычисления</h2>
+			<ul class="cascadeList">
+				<li>
+					map — выполнение одной и той же функции над каждым элементом массива входных данных, с получением равного по мощности массива результатов вычисления
+					<ul>
+						<li>
+							<code style="background: darkblue">
+								var arr = [1, 2, 3, 4, 5] <br />
+								// для каждого элемента массива запустить функцию, <br />
+								// промежуточный результат передавать первым аргументом далее <br />
+								var result = arr.reduce(function(sum, current) { <br />
+								return sum + current; <br />
+								}, 0); <br />
+
+								alert( result ); // 15 <br />
+							</code>
+						</li>
+						<li>
+							<code style="background: darkblue">
+								// Функция, используемая рабочими нодами на Map-шаге <br />
+								// для обработки пар ключ-значение из входного потока <br />
+								void map(String name, String document): <br />
+								// Входные данные: <br />
+								//   name - название документа <br />
+								//   document - содержимое документа <br />
+								for each word w in document: <br />
+								EmitIntermediate(w, "1"); <br />
+							</code>
+						</li>
+					</ul>
+				</li>
+				<li>
+					reduce — выполнение одной и той же функции для добавления вклада каждого элемента входных данных в одно итоговое значение
+					<ul>
+						<li>
+							<code style="background: darkblue">
+								var numbers = [1, 4, 9];<br />
+								var doubles = numbers.map(function(num) {<br />
+								return num * 2;<br />
+								});<br />
+								// теперь doubles равен [2, 8, 18], а numbers всё ещё равен [1, 4, 9]<br />
+							</code>
+						</li>
+						<li>
+							<code style="background: darkblue">
+								// Функция, используемая рабочими нодами на Reduce-шаге <br />
+								// для обработки пар ключ-значение, полученных на Map-шаге<br />
+								void reduce(Iterator partialCounts):<br />
+								// Входные данные:<br />
+								//   partialCounts - список группированных промежуточных результатов. Количество записей в partialCounts и есть<br />
+								//     требуемое значение<br />
+								int result = 0;<br />
+								for each v in partialCounts:<br />
+								result += parseInt(v);<br />
+								Emit(AsString(result));<br />
+							</code>
+						</li>
+					</ul>
+				</li>
+				<p><img src="https://www.bigdataschool.ru/wp-content/uploads/2019/10/MapReduce0.png"></p>
+			</ul>
+		</div>
+	</section>
+	<section>
+		<div class="container">
+			<table class="table" name="tableBody">
+				<caption>Программные инструменты параллелизма</caption>
+				<tr name="tableRow0"><td>OpenMP</td><td>Стандарт интерфейса приложений для параллельных систем с общей памятью</td></tr>
+				<tr name="tableRow1"><td>POSIX Threads</td><td>Стандарт реализации потоков выполнения</td></tr>
+				<tr name="tableRow2"><td>Windows API</td><td>Многопоточные приложения для С++</td></tr>
+				<tr name="tableRow3"><td>PVM (Parallel Virtual Machine</td><td>Позволяет объединить разнородный (но связанный сетью) набор компьютеров в общий вычислительный ресурс</td></tr>
+				<tr name="tableRow4"><td>MPI (Message Passing Interface)</td><td>Стандарт систем передачи сообщений между параллельно исполняемыми процессами</td></tr>
+			</table>
+			 <div class="tableControls">
+				 <button class="controlButton" name="addButton">Добавить строку</button>
+				 <button class="controlButton" name="deleteButton">Удалить строку</button>
+			 </div>
+		</div>
+	</section>
+	<footer class="footer">
+		<p class="copyright" name="copyright">
+			2021 © Марина Яснева
+		</p>
+		<a href="./contacts.html" class="contactsLink">
+			Контакты
+		</a>
+	</footer>
+	<div class="authorModal" name="authorModal">
+		<h3>
+			Марина Яснева
+		</h3>
+		<p>
+			Группа 4916
+		</p>
+	</div>
+	<script>
+
+		const getRandomInt = (max) => {
+			return Math.floor(Math.random() * max);
+		}
+
+		const copyrightElem = document.getElementsByName('copyright')[0];
+		const authorModal = document.getElementsByName('authorModal')[0];
+		const slideImgElem = document.getElementsByName('slideImg')[0];
+		const addButtonElem = document.getElementsByName('addButton')[0];
+		const deleteButtonElem = document.getElementsByName('deleteButton')[0];
+		const headerElem = document.getElementsByName('header')[0];
+
+		const onOpenModal = () => {
+			authorModal.style.display = 'flex';
+		}
+
+		copyrightElem.addEventListener('mouseover', onOpenModal);
+
+		const imgArray = [
+			'./img/slide1.jpg',
+			'./img/slide2.gif',
+			'./img/slide3.jpg',
+			'./img/slide4.jpg',
+			'./img/slide5.jpg'
+		];
+
+		let currentSlideNumber = 0;
+
+		setInterval(() => {
+			slideImgElem.style.background = `url(' ${ imgArray[currentSlideNumber].toString() } ')`;
+			console.log(currentSlideNumber);
+			currentSlideNumber++;
+			if (currentSlideNumber === imgArray.length) {
+				currentSlideNumber = 0
+			}
+			console.log('test');
+		}, 2000);
+
+		let tableRowElems = [];
+
+		const handleCheckTable = () => {
+			let i = 0;
+			while (document.getElementsByName('tableRow' + i)[0]) {
+				tableRowElems.push(document.getElementsByName('tableRow' + i)[0]);
+				i++;
+			}
+		}
+
+		handleCheckTable();
+
+		const onRemoveTableRow = () => {
+			const tableRowLength = tableRowElems.length;
+			if (tableRowLength !== 0) {
+				tableRowElems[tableRowLength - 1].remove();
+				tableRowElems.splice(tableRowLength - 1, 1)
+			}
+		};
+
+		const onAddTableRow = () => {
+			const newRow = document.createElement("tr");
+			newRow.innerHTML = '<td></td><td></td>';
+			document.getElementsByName('tableBody')[0].appendChild(newRow);
+			tableRowElems.push(newRow);
+		};
+
+		addButtonElem.addEventListener('mouseover', onAddTableRow);
+		deleteButtonElem.addEventListener('mouseover', onRemoveTableRow);
+
+		const onChangeHeaderBackground = () => {
+			headerElem.style.background = `rgb(${getRandomInt(256)}, ${getRandomInt(256)}, ${getRandomInt(256)})`
+		}
+
+		headerElem.addEventListener('mouseover', onChangeHeaderBackground);
+	</script>
+	</body>
+</html>
